@@ -102,6 +102,10 @@ if (this.tank<0){
   return ` I ran out of fuel at ${this.odometer} miles!`
 }
 }
+Car.prototype.fill = function(gallons){
+  this.tank += gallons;
+  // return this.tank += gallons;
+}
   
 // const myCar = new Car({
 //   model: "Nissan Rogue Sport",
@@ -111,7 +115,8 @@ if (this.tank<0){
 // console.log(myCar.tank);
 // console.log(myCar.tank);
 // myCar.drive(60);
-// console.log(myCar.tank + `` + myCar.odometer);
+// myCar.fill(33);
+// console.log(`${myCar.tank} ${myCar.odometer}`);
 
 
 
@@ -124,18 +129,36 @@ if (this.tank<0){
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age),
+  this.favoriteToy = favoriteToy
+   }
 
-}
+   Baby.prototype = Object.create(Person.prototype)
+   Baby.prototype.play = function(){
+    return `Playing with ${this.favoriteToy}`;
+   }
+
+   const newBaby = {
+     name: "Mikey",
+     age: 1,
+     favoriteToy: "ball",
+   };
+
+   const badBaby = new Baby(newBaby);
+   console.log(badBaby.toString());
+   console.log(badBaby.play);
+
+
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1.  if there is a function or method inside an object, "this" will reference the object itself.
+  2. if the function is not part of an object, "this" belongs to global or "window" object in the global scope.
+  3. dot notation will be implemented to implicitly bind "this" to function whithin an object. any New object will be a constructor in which "this" could be referenced. 
+  4. when using "call", "this" will be explicitly bound to a method or constructor. 
 */
 
 
